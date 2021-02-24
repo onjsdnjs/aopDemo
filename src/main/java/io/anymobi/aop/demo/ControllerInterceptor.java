@@ -47,7 +47,6 @@ public class ControllerInterceptor implements HandlerInterceptor {
             Object retVal = aopController.aopAdapter(request, response, memberDto);
 
             System.out.println("retVal : " + retVal);
-
         }
         return true;
     }
