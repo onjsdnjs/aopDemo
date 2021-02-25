@@ -23,7 +23,6 @@ public class AopController {
             if (AopResult.getResult() == null) {
 
                 if (memberDto.isJson()) {
-                    objectMapper.writeValueAsString(memberDto);
                     AopResult.setResult(objectMapper.writeValueAsString(memberDto));
 
                 } else if (memberDto.isForm()) {
