@@ -22,20 +22,17 @@ public class AopController {
 
             if (AopResult.getResult() == null) {
 
-                boolean isJson = request.getRequestURI().endsWith("json");
-                boolean isForm = request.getRequestURI().endsWith("form");
-
-                if (isJson) {
+                if (memberDto.isJson()) {
                     objectMapper.writeValueAsString(memberDto);
                     AopResult.setResult(objectMapper.writeValueAsString(memberDto));
 
-                } else if (isForm) {
+                } else if (memberDto.isForm()) {
                     AopResult.setResult(memberDto.toString());
 
                 }
             }
         }
-        return "bypass";
+        return AopResult.getResult();
     }
 
     @GetMapping("/aopService/{id}")

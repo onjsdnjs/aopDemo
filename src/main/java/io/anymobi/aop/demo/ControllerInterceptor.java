@@ -22,7 +22,7 @@ public class ControllerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         Object bean = ((HandlerMethod) handler).getBean();
-        MemberDto memberDto = new MemberDto(Thread.currentThread().getName());
+        MemberDto memberDto = new MemberDto(Thread.currentThread().getName(),false,false);
 
         if(bean instanceof Advised){
 
