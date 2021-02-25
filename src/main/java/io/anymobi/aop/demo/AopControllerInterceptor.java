@@ -14,7 +14,9 @@ public class AopControllerInterceptor implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 
-        AopController aopController = (AopController)methodInvocation.getThis();
+        Object retVal = methodInvocation.proceed();
+
+        /*AopController aopController = (AopController)methodInvocation.getThis();
         Object[] arguments = methodInvocation.getArguments();
         HttpServletRequest request = (HttpServletRequest) arguments[0];
         MemberDto memberDto = (MemberDto) arguments[2];
@@ -40,7 +42,7 @@ public class AopControllerInterceptor implements MethodInterceptor {
                     retVal = method.invoke(methodInvocation.getThis(), arguments);
                 }
             }
-        }
+        }*/
 
         return retVal;
     }
