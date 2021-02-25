@@ -13,14 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AopController {
 
-    public String aopAdapter(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) throws JsonProcessingException {
+    public void aopAdapter(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) throws JsonProcessingException {
 
         if (memberDto != null) {
             if (AopResult.getResult() == null) {
                 AopResult.setResult(memberDto.getResult());
             }
         }
-        return AopResult.getResult();
     }
 
         @GetMapping("/aopService/{id}")
