@@ -36,10 +36,8 @@ public class AopControllerInterceptor implements MethodInterceptor {
                 } else if (isForm) {
                     if(memberDto != null){
                         arguments[2] = memberDto.toString();
-                        retVal = method.invoke(methodInvocation.getThis(), arguments);
-                    }else{
-                        retVal = method.invoke(methodInvocation.getThis(), arguments);
                     }
+                    retVal = method.invoke(methodInvocation.getThis(), arguments);
                 }
             }
         }
