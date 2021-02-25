@@ -14,30 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AopController {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
     public String aopAdapter(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) throws JsonProcessingException {
 
         if (memberDto != null) {
-
             if (AopResult.getResult() == null) {
-
-                if (memberDto.isJson()) {
-                    AopResult.setResult(objectMapper.writeValueAsString(memberDto));
-
-                } else if (memberDto.isForm()) {
-                    AopResult.setResult(memberDto.toString());
-
-                }
+                AopResult.setResult(memberDto.getResult());
             }
         }
         return AopResult.getResult();
     }
 
-    @GetMapping("/aopService/{id}")
-    public String aopService(HttpServletRequest request, HttpServletResponse response, String memberDto) {
+        @GetMapping("/aopService/{id}")
+        public String aopService (HttpServletRequest request, HttpServletResponse response, String memberDto){
 
-        return AopResult.getResult();
+            return AopResult.getResult();
 
+        }
     }
-}

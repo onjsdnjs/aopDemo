@@ -1,11 +1,14 @@
 package io.anymobi.aop.demo;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class AopControllerInterceptor implements MethodInterceptor {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
@@ -14,12 +17,13 @@ public class AopControllerInterceptor implements MethodInterceptor {
         HttpServletRequest request = (HttpServletRequest) arguments[0];
         MemberDto memberDto = (MemberDto) arguments[2];
 
-        boolean isJson = request.getRequestURI().endsWith("json");
-        boolean isForm = request.getRequestURI().endsWith("form");
+        if (memberDto != null) {
+            if (request.getRequestURI().endsWith("json")) {
+                memberDto.setResult(objectMapper.writeValueAsString(memberDto));
 
-        if(memberDto != null) {
-            memberDto.setJson(isJson);
-            memberDto.setForm(isForm);
+            } else if (request.getRequestURI().endsWith("form")) {
+                memberDto.setResult(memberDto.toString());
+            }
         }
 
         Object retVal = methodInvocation.proceed();

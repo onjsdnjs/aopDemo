@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class MemberDto implements Serializable {
 
     private String name;
-    private boolean isJson;
-    private boolean isForm;
+    private String result;
 
-    public MemberDto(String name, boolean b, boolean b1) {
+    public MemberDto(String name, String result) {
         this.name = name;
+        this.result = result;
     }
 
     public String getName() {
@@ -20,28 +20,18 @@ public class MemberDto implements Serializable {
         this.name = name;
     }
 
-    public boolean isJson() {
-        return isJson;
+    public String getResult() {
+        return result;
     }
-
-    public void setJson(boolean json) {
-        isJson = json;
-    }
-
-    public boolean isForm() {
-        return isForm;
-    }
-
-    public void setForm(boolean form) {
-        isForm = form;
+    public void setResult(String result) {
+        this.result = result;
     }
 
     @Override
     public String toString() {
         return "MemberDto{" +
                 "name='" + name + '\'' +
-                ", isJson=" + isJson +
-                ", isForm=" + isForm +
+                ", result='" + result + '\'' +
                 '}';
     }
 }
