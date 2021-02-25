@@ -40,6 +40,8 @@ public class AopController {
 
     @GetMapping("/aopService/{id}")
     public String aopService(HttpServletRequest request, HttpServletResponse response, String memberDto) {
+
         return AopResult.getResult();
+
     }
 }
