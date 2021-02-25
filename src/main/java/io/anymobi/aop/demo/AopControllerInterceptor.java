@@ -3,9 +3,6 @@ package io.anymobi.aop.demo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -31,8 +28,8 @@ public class AopControllerInterceptor implements MethodInterceptor {
         boolean isForm = request.getRequestURI().endsWith("form");
 
         Method[] declaredMethods = aopController.getClass().getDeclaredMethods();
-        Map<String, Method> methodMap = new HashMap<String, Method>();
-        Map<String, String> argMap = new HashMap<String, String>();
+        Map<String, Method> methodMap = new HashMap<>();
+        Map<String, String> argMap = new HashMap<>();
 
         for (Method method : declaredMethods) {
             String name = method.getName();
