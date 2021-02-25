@@ -25,9 +25,6 @@ public class AopControllerInterceptor implements MethodInterceptor {
                 memberDto.setResult(memberDto.toString());
             }
         }
-
-        Object retVal = methodInvocation.proceed();
-
-        return retVal;
+        return methodInvocation.proceed();
     }
 }
