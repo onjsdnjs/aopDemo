@@ -18,18 +18,18 @@ public class AopController {
 
     public String aopAdapter(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) throws JsonProcessingException {
 
-        if(memberDto != null){
+        if (memberDto != null) {
 
             if (AopResult.getResult() == null) {
 
                 boolean isJson = request.getRequestURI().endsWith("json");
                 boolean isForm = request.getRequestURI().endsWith("form");
 
-                if(isJson){
+                if (isJson) {
                     objectMapper.writeValueAsString(memberDto);
                     AopResult.setResult(objectMapper.writeValueAsString(memberDto));
 
-                }else if(isForm){
+                } else if (isForm) {
                     AopResult.setResult(memberDto.toString());
 
                 }
@@ -40,15 +40,6 @@ public class AopController {
 
     @GetMapping("/aopService/{id}")
     public String aopService(HttpServletRequest request, HttpServletResponse response, String memberDto) {
-
-        if(memberDto != null && !"null".equals(memberDto)){
-            return AopResult.getResult();
-        }else{
-            try{
-                return AopResult.getResult();
-            }finally{
-                AopResult.clear();
-            }
-        }
+        return AopResult.getResult();
     }
 }
