@@ -35,6 +35,7 @@ public class ControllerInterceptor implements HandlerInterceptor {
             for(Advisor advisor : advisors){
                 if(advisor.getAdvice() instanceof AopControllerInterceptor){
                     aopAdvice = adviceMap.get(AopControllerInterceptor.class);
+                    break;
                 }
             }
 
