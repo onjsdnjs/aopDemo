@@ -22,6 +22,7 @@ public class ControllerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         Object bean = ((HandlerMethod) handler).getBean();
+        MemberDto memberDto = new MemberDto(Thread.currentThread().getName());
 
         if(bean instanceof Advised){
 
@@ -42,11 +43,10 @@ public class ControllerInterceptor implements HandlerInterceptor {
                 advised.addAdvice(0, aopControllerInterceptor);
             }
 
-            MemberDto memberDto = new MemberDto(Thread.currentThread().getName());
-            Object retVal = ((AopController)bean).aopAdapter(request, response, memberDto);
-
-            System.out.println("retVal : " + retVal);
         }
+
+        ((AopController)bean).aopAdapter(request, response, memberDto);
+
         return true;
     }
 
