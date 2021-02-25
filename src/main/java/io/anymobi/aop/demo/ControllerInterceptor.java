@@ -24,8 +24,7 @@ public class ControllerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        Object bean = handlerMethod.getBean();
+        Object bean = ((HandlerMethod) handler).getBean();
 
         if(bean instanceof Advised){
 
