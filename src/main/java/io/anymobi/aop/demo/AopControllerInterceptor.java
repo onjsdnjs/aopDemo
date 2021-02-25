@@ -15,17 +15,12 @@ import java.util.Map;
 
 public class AopControllerInterceptor implements MethodInterceptor {
 
-    private Object aopController;
-
-    public AopControllerInterceptor(Object aopController) {
-
-        this.aopController = aopController;
-    }
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        AopController aopController = (AopController)methodInvocation.getThis();
         Object[] arguments = methodInvocation.getArguments();
         HttpServletRequest request = (HttpServletRequest) arguments[0];
         MemberDto memberDto = (MemberDto) arguments[2];
@@ -59,11 +54,11 @@ public class AopControllerInterceptor implements MethodInterceptor {
         Object retVal = null;
         if (isJson) {
             arguments[2] = argMap.get("jsonArg");
-            retVal = methodMap.get("json").invoke(aopController, arguments);
+            retVal = methodMap.get("json").invoke(methodInvocation.getThis(), arguments);
 
         } else if (isForm) {
             arguments[2] = argMap.get("formArg");
-            retVal = methodMap.get("form").invoke(aopController, arguments);
+            retVal = methodMap.get("form").invoke(methodInvocation.getThis(), arguments);
 
         }
         return retVal;
