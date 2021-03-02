@@ -22,21 +22,14 @@ public class ControllerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         if(handler instanceof  HandlerMethod) {
+
             Object bean = ((HandlerMethod) handler).getBean();
             MemberDto memberDto = new MemberDto(Thread.currentThread().getName(), "Aop is very great technology");
 
             if (bean instanceof Advised) {
 
                 Advised advised = (Advised) bean;
-                Advisor[] advisors = advised.getAdvisors();
-                Advice aopAdvice = null;
-
-                for (Advisor advisor : advisors) {
-                    if (advisor.getAdvice() instanceof AopControllerInterceptor) {
-                        aopAdvice = adviceMap.get(AopControllerInterceptor.class);
-                        break;
-                    }
-                }
+                Advice aopAdvice = adviceMap.get(AopControllerInterceptor.class);
 
                 if (aopAdvice == null) {
                     AopControllerInterceptor aopControllerInterceptor = new AopControllerInterceptor();
